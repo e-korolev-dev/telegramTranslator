@@ -8,7 +8,7 @@ let adminLanguage = null;
 
 async function translateText(text, targetLanguage) {
   try {
-    const response = await axios.post('http://127.0.0.1:5000/translate', {
+    const response = await axios.post('http://10.250.16.145:5000/translate', {
       text: text,
       language: targetLanguage
     });
