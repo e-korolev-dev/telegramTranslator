@@ -5,19 +5,19 @@
         "nixpacksPlan": {
             "phases": {
                 "setup": {
-                    "nixPkgs": ["nodejs", "yarn", "python38Full"]
+                    "nixPkgs": ["nodejs", "yarn", "python38Full", "python38Packages.pip", "python38Packages.virtualenv"]
                 },
                 "install": {
                     "cmds": [
                         "cd bot && yarn install",
-                        "cd api && python3.8 -m ensurepip",
-                        "cd api && python3.8 -m pip install --no-cache-dir -r requirements.txt"
+                        "cd api && python3.8 -m virtualenv venv",
+                        "cd api && source venv/bin/activate && pip install -r requirements.txt"
                     ]
                 }
             }
         }
     },
     "deploy": {
-        "startCommand": "sh -c 'cd api && python3.8 app.py & cd bot && node index.js'"
+        "startCommand": "sh -c 'cd api && source venv/bin/activate && python app.py & cd bot && node index.js'"
     }
 }
