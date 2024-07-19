@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  bot:
+    build: ./bot
+    container_name: telegram_bot
+    environment:
+      - TELEGRAM_BOT_TOKEN=YOUR_TELEGRAM_BOT_TOKEN
+    depends_on:
+      - api
+
+  api:
+    build: ./api
+    container_name: translation_api
+    environment:
+      - OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+    ports:
+      - "5000:5000"
+
