@@ -1,0 +1,25 @@
+{
+  "build": {
+    "builder": "NIXPACKS",
+    "nixpacksPlan": {
+      "phases": {
+        "setup": {
+          "nixPkgs": ["nodejs", "yarn", "python38"]
+        },
+        "install": {
+          "cmds": [
+            "cd bot && yarn install",
+            "cd api && python3.8 -m ensurepip",
+            "cd api && python3.8 -m pip install -r requirements.txt"
+          ]
+        },
+        "start": {
+          "cmds": [
+            "python3.8 api/app.py &",
+            "node bot/index.js"
+          ]
+        }
+      }
+    }
+  }
+}
