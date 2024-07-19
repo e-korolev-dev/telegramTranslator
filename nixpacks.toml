@@ -5,10 +5,13 @@ nixPkgs = ['nodejs', 'yarn', 'python38']
 
 [phases.install]
 cmds = [
-  'cd bot && yarn install',
-  'cd api && python3.8 -m ensurepip',
-  'cd api && python3.8 -m pip install -r requirements.txt'
+    'cd bot && yarn install',
+    'cd api && python3.8 -m ensurepip',
+    'cd api && python3.8 -m pip install -r requirements.txt'
 ]
 
 [start]
-cmds = 'cd bot && node index.js'
+cmds = [
+    'cd api && python3.8 app.py &',
+    'cd bot && node index.js'
+]
