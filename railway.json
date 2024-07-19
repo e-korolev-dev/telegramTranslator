@@ -11,7 +11,7 @@
                     "cmds": [
                         "cd bot && yarn install",
                         "cd api && python3.8 -m virtualenv venv",
-                        "cd api && source venv/bin/activate && pip install -r requirements.txt"
+                        "cd api && source venv/bin/activate && pip install --no-cache-dir --disable-pip-version-check -r requirements.txt"
                     ]
                 }
             }
