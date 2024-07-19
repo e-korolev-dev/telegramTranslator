@@ -5,12 +5,12 @@
         "nixpacksPlan": {
             "phases": {
                 "setup": {
-                    "nixPkgs": ["nodejs", "yarn", "python38"]
+                    "nixPkgs": ["nodejs", "yarn", "python38Full"]
                 },
                 "install": {
                     "cmds": [
                         "cd bot && yarn install",
-                        "cd api && python3.8 -m ensurepip",
+                        "cd api && python3.8 -m pip install --upgrade pip",
                         "cd api && python3.8 -m pip install -r requirements.txt"
                     ]
                 }
