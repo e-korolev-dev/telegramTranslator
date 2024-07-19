@@ -9,8 +9,8 @@ cmds = [
   'cd api && pip install -r requirements.txt'
 ]
 
+[phases.build]
+cmds = []
+
 [start]
-cmds = [
-  'cd api && python app.py &',
-  'cd bot && node index.js'
-]
+cmd = "sh -c 'cd api && python app.py & cd bot && node index.js'"
