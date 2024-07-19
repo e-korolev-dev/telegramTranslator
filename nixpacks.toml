@@ -1,16 +1,17 @@
 # nixpacks.toml
 
 [phases.setup]
-nixPkgs = ['nodejs', 'yarn', 'python38', 'pip']
+nixPkgs = ['nodejs', 'yarn', 'python38']
 
 [phases.install]
 cmds = [
   'cd bot && yarn install',
-  'cd api && pip install -r requirements.txt'
+  'cd api && python3.8 -m ensurepip',
+  'cd api && python3.8 -m pip install -r requirements.txt'
 ]
 
-[phases.build]
-cmds = []
-
 [start]
-cmd = "sh -c 'cd api && python app.py & cd bot && node index.js'"
+cmds = [
+  'cd api && nohup python3.8 app.py &',
+  'cd bot && node index.js'
+]
