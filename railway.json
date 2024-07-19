@@ -10,8 +10,8 @@
                 "install": {
                     "cmds": [
                         "cd bot && yarn install",
-                        "cd api && python3.8 -m virtualenv venv",
-                        "cd api && source venv/bin/activate && pip install --no-cache-dir --disable-pip-version-check -r requirements.txt"
+                        "cd api && python3.8 -m venv venv",
+                        "cd api && source venv/bin/activate && pip install --no-cache-dir --break-system-packages -r requirements.txt"
                     ]
                 }
             }
