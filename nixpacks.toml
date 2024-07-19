@@ -10,8 +10,10 @@ cmds = [
   'cd api && python3.8 -m pip install -r requirements.txt'
 ]
 
-[start]
-cmds = [
-  'cd api && nohup python3.8 app.py &',
-  'cd bot && node index.js'
-]
+[start.api]
+cmd = 'python3.8 app.py'
+cwd = 'api'
+
+[start.bot]
+cmd = 'node index.js'
+cwd = 'bot'
