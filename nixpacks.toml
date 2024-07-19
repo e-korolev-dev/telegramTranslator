@@ -11,7 +11,4 @@ cmds = [
 ]
 
 [start]
-cmds = [
-  'cd api && python3.8 app.py &',
-  'cd bot && node index.js'
-]
+cmds = 'cd bot && node index.js'
