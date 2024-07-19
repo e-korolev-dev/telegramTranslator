@@ -14,10 +14,7 @@
           ]
         },
         "start": {
-          "cmds": [
-            "python3.8 api/app.py &",
-            "node bot/index.js"
-          ]
+          "cmd": "sh -c 'cd api && nohup python3.8 app.py & cd bot && node index.js'"
         }
       }
     }
