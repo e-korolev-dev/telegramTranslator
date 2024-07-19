@@ -8,7 +8,7 @@ let adminLanguage = null;
 
 async function translateText(text, targetLanguage) {
   try {
-    const response = await axios.post('http://localhost:5000/translate', {
+    const response = await axios.post('http://api:5000/translate', {
       text: text,
       language: targetLanguage
     });
@@ -19,10 +19,12 @@ async function translateText(text, targetLanguage) {
   }
 }
 
+// Обработка команды /start
 bot.start((ctx) => {
   ctx.reply('Привет! Я бот-переводчик. Используй команду /translate, чтобы установить язык перевода.');
 });
 
+// Обработка команды /translate
 bot.command('translate', async (ctx) => {
   const userId = ctx.from.id;
   const languageInput = ctx.message.text.split(' ').slice(1).join(' ');
@@ -33,6 +35,7 @@ bot.command('translate', async (ctx) => {
   ctx.reply(`Язык перевода установлен на ${language}.`);
 });
 
+// Обработка команды /admin_translate
 bot.command('admin_translate', async (ctx) => {
   const languageInput = ctx.message.text.split(' ').slice(1).join(' ');
 
@@ -42,6 +45,7 @@ bot.command('admin_translate', async (ctx) => {
   ctx.reply(`Язык перевода для всех участников установлен на ${language}.`);
 });
 
+// Обработка входящих сообщений
 bot.on('text', async (ctx) => {
   const userId = ctx.from.id;
   const userLanguage = userLanguages[userId] || adminLanguage;
