@@ -11,13 +11,13 @@
                     "cmds": [
                         "cd bot && yarn install",
                         "cd api && python3.9 -m venv venv",
-                        "cd api && source venv/bin/activate && pip install --no-cache-dir --disable-pip-version-check --no-warn-script-location -r requirements.txt"
+                        "cd api && . venv/bin/activate && pip install --no-cache-dir --disable-pip-version-check --no-warn-script-location -r requirements.txt"
                     ]
                 }
             }
         }
     },
     "deploy": {
-        "startCommand": "sh -c 'cd api && source venv/bin/activate && python app.py & cd bot && node index.js'"
+        "startCommand": "sh -c 'cd api && . venv/bin/activate && python app.py & cd bot && node index.js'"
     }
 }

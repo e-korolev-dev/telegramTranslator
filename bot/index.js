@@ -6,13 +6,17 @@ const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 let userLanguages = {};
 let adminLanguage = null;
 
-// Функция для перевода текста с определением языка
 async function translateText(text, targetLanguage) {
-  const response = await axios.post('http://translation_api:5000/translate', {
-    text: text,
-    language: targetLanguage
-  });
-  return response.data.translated_text;
+  try {
+    const response = await axios.post('http://localhost:5000/translate', {
+      text: text,
+      language: targetLanguage
+    });
+    return response.data.translated_text;
+  } catch (error) {
+    console.error('Translation API error:', error);
+    throw new Error('Ошибка перевода.');
+  }
 }
 
 bot.start((ctx) => {
@@ -23,7 +27,6 @@ bot.command('translate', async (ctx) => {
   const userId = ctx.from.id;
   const languageInput = ctx.message.text.split(' ').slice(1).join(' ');
 
-  // Переводим введенный пользователем язык на английский
   const language = await translateText(languageInput, 'english');
 
   userLanguages[userId] = language;
@@ -33,7 +36,6 @@ bot.command('translate', async (ctx) => {
 bot.command('admin_translate', async (ctx) => {
   const languageInput = ctx.message.text.split(' ').slice(1).join(' ');
 
-  // Переводим введенный администратором язык на английский
   const language = await translateText(languageInput, 'english');
 
   adminLanguage = language;
