@@ -4,16 +4,15 @@ services:
   bot:
     build: ./bot
     container_name: telegram_bot
-    environment:
-      - TELEGRAM_BOT_TOKEN=YOUR_TELEGRAM_BOT_TOKEN
+    env_file:
+      - .env
     depends_on:
       - api
 
   api:
     build: ./api
     container_name: translation_api
-    environment:
-      - OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+    env_file:
+      - .env
     ports:
       - "5000:5000"
-
