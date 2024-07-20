@@ -3,7 +3,7 @@ const axios = require('axios');
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
-const apiUrl = process.env.API_URL || 'http://api:5000'; // Используйте переменную среды API_URL
+const apiUrl = process.env.API_URL || 'http://127.0.0.1/api:5000'; // Используйте переменную среды API_URL
 
 let userLanguages = {};
 let adminLanguage = null;
