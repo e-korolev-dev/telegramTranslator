@@ -61,7 +61,7 @@ const translateText = async (text, targetLanguage) => {
       text: text,
       language: targetLanguage,
     });
-    return response.data.translated_test.trim();
+    return response.data.translated_text.trim();
   } catch (error) {
     console.error(`Translation API error: ${error}`);
     throw error;
