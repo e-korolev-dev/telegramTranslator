@@ -17,13 +17,21 @@ def translate():
     logging.info(f"Received data: {data}")
     text = data.get('text')
     target_language = data.get('language')
+    action = data.get('action')
 
     try:
+        if action == 'get_language_name':
+            prompt = f"Translate the following language name to English: {text}"
+        elif action == 'translate_text':
+            prompt = f"Translate the following text to {target_language}: {text}"
+        else:
+            return jsonify({"error": "Invalid action"}), 400
+
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a translator."},
-                {"role": "user", "content": f"Translate the following text to {target_language}: {text}"}
+                {"role": "user", "content": prompt}
             ]
         )
         logging.info(f"OpenAI response: {response}")
