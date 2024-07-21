@@ -16,13 +16,13 @@ bot.command('translate', async (ctx) => {
   if (targetLanguage) {
     try {
       const response = await axios.post(`${apiUrl}/translate`, {
-        text: `Please provide the English name of the language: ${targetLanguage}`,
+        text: targetLanguage,
         language: 'english',
       });
       const translatedLanguage = response.data.translated_text.trim();
       if (userLanguages[ctx.from.id]) {
         userLanguages[ctx.from.id].language = translatedLanguage;
-        ctx.reply(`Your preferred language has been set to ${targetLanguage} translates to ${translatedLanguage} in english.`);
+        ctx.reply(`Your preferred language has been set to ${translatedLanguage}.`);
         console.log(`Set language for user ${ctx.from.username} to ${translatedLanguage}`);
       } else {
         ctx.reply('Please start the bot using /start first.');
