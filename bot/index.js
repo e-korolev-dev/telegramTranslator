@@ -1,59 +1,42 @@
 const { Telegraf, Markup } = require('telegraf');
 const axios = require('axios');
 require('dotenv').config();
-
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 const apiUrl = process.env.API_URL;
 const environment = process.env.NODE_ENV || 'prod';
-
 let userLanguages = {};
 let adminLanguage = null;
-
-// Функция для создания кнопок меню
 const createMenu = () => {
   return Markup.keyboard([
-    ['/start', '/translate'],
-    ['/admin_language', '/user_list']
-  ]).resize().extra();
+    ['/start', '/translate', '/admin_language', '/user_list'],
+  ]).resize();
 };
-
-// Стартовая команда
 bot.start((ctx) => {
   userLanguages[ctx.from.id] = { language: null, name: ctx.from.first_name || ctx.from.username };
   ctx.reply('Welcome! Send me a message and I will translate it for you. Use /translate <target_language> to set your preferred language.', createMenu());
   console.log('Started conversation with:', ctx.from.username);
 });
-
-// Команда для установки языка
 bot.command('translate', async (ctx) => {
   const targetLanguage = ctx.message.text.split(' ')[1];
   if (targetLanguage) {
     try {
       const response = await axios.post(`${apiUrl}/translate`, {
-        text: `Translate the name of this language to English in one word: ${targetLanguage}`,
+        text: targetLanguage,
         language: 'english',
       });
-
       const translatedLanguage = response.data.translated_text.trim();
-
-      if (userLanguages[ctx.from.id]) {
-        userLanguages[ctx.from.id].language = translatedLanguage;
-        ctx.reply(`Your preferred language has been set to ${translatedLanguage}.`);
-        console.log(`Set language for user ${ctx.from.username} to ${translatedLanguage}`);
-      } else {
-        ctx.reply('Please start the bot using /start first.');
-      }
+      userLanguages[ctx.from.id].language = translatedLanguage;
+      ctx.reply(`Your preferred language has been set to ${translatedLanguage}.`);
+      console.log(`Set language for user ${ctx.from.username} to ${translatedLanguage}`);
     } catch (error) {
-      ctx.reply('Error translating the language.');
       console.error(`Translation API error: ${error}`);
+      ctx.reply('There was an error translating the language. Please try again.');
     }
   } else {
     ctx.reply('Please specify a target language.');
     console.log(`User ${ctx.from.username} did not specify a target language`);
   }
 });
-
-// Команда для установки языка администратора
 bot.command('admin_language', (ctx) => {
   const targetLanguage = ctx.message.text.split(' ')[1];
   if (targetLanguage) {
@@ -65,8 +48,6 @@ bot.command('admin_language', (ctx) => {
     console.log('Admin did not specify a target language');
   }
 });
-
-// Команда для отображения списка пользователей
 bot.command('user_list', (ctx) => {
   let userList = 'User list:\n';
   for (const [, { language, name }] of Object.entries(userLanguages)) {
@@ -75,8 +56,6 @@ bot.command('user_list', (ctx) => {
   ctx.reply(userList);
   console.log('Displayed user list');
 });
-
-// Функция для перевода текста
 const translateText = async (text, targetLanguage) => {
   try {
     const response = await axios.post(`${apiUrl}/translate`, {
@@ -89,23 +68,18 @@ const translateText = async (text, targetLanguage) => {
     throw error;
   }
 };
-
-// Обработчик текстовых сообщений
 bot.on('text', async (ctx) => {
   if (!userLanguages[ctx.from.id]) {
     ctx.reply('Please start the bot using /start first.');
     console.log(`User ${ctx.from.username} is not recognized, asked to use /start.`);
     return;
   }
-
   const senderId = ctx.message.from.id;
   const senderLanguage = userLanguages[senderId].language;
   const senderText = ctx.message.text;
   console.log(`Received message from ${ctx.from.username}: ${senderText}`);
-
   if (senderLanguage || adminLanguage) {
     const chatId = ctx.message.chat.id;
-
     if (senderLanguage) {
       for (const [userId, { language, name }] of Object.entries(userLanguages)) {
         if (parseInt(userId) !== senderId || environment === 'dev') {
@@ -120,7 +94,6 @@ bot.on('text', async (ctx) => {
         }
       }
     }
-
     if (adminLanguage) {
       try {
         console.log(`Translating message to admin language ${adminLanguage}`);
@@ -135,7 +108,6 @@ bot.on('text', async (ctx) => {
     console.log(`No preferred language set for user ${ctx.from.username}`);
   }
 });
-
 bot.launch().then(() => {
   console.log('Bot is running');
 });
