@@ -4,26 +4,18 @@ services:
   api:
     build:
       context: ./api
-      dockerfile: Dockerfile
+    restart: unless-stopped
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
     ports:
       - "5000:5000"
-    networks:
-      - app-network
 
   bot:
     build:
       context: ./bot
-      dockerfile: Dockerfile
+    restart: unless-stopped
     environment:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
-      - API_URL=http://api:5000
+      - API_URL=${API_URL}
     depends_on:
       - api
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge

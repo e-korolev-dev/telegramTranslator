@@ -38,3 +38,5 @@ OPENAI_API_KEY=your_openai_api_key
 docker-compose up --build -d
 ```
 
+Тест api : curl -X POST http://localhost:5000/translate -H "Content-Type: application/json" -d '{"text": "Привет мир", "language": "
+english"}'

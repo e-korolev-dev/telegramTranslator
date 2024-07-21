@@ -1,13 +1,18 @@
-# api/Dockerfile
+# Используйте подходящий базовый образ
+FROM python:3.9
 
-FROM python:3.9-slim
+# Установите необходимые зависимости
+RUN pip install --upgrade pip
 
-WORKDIR /app
+# Установите зависимости из requirements.txt
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
+# Скопируйте приложение
 COPY . /app
 
-RUN python -m venv venv && \
-    . venv/bin/activate && \
-    pip install --no-cache-dir -r requirements.txt
+# Установите рабочую директорию
+WORKDIR /app
 
-CMD ["sh", "-c", ". venv/bin/activate && python app.py"]
+# Запустите приложение
+CMD ["python", "app.py"]
