@@ -16,7 +16,7 @@ bot.command('translate', async (ctx) => {
   if (targetLanguage) {
     try {
       const response = await axios.post(`${apiUrl}/translate`, {
-        text: targetLanguage,
+        text: `Please provide the English name of the language: ${targetLanguage}`,
         language: 'english',
       });
       const translatedLanguage = response.data.translated_text.trim();
