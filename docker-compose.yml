@@ -17,5 +17,6 @@ services:
     environment:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - API_URL=${API_URL}
+      - NODE_ENV=${NODE_ENV}
     depends_on:
       - api
