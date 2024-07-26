@@ -6,7 +6,7 @@
       "phases": {
         "setup": {
           "nixPkgs": [
-            "nodejs-20",
+            "nodejs",
             "yarn",
             "python39Full",
             "python39Packages.pip",
