@@ -6,17 +6,12 @@
       "phases": {
         "setup": {
           "nixPkgs": [
-            "nodejs",
+            "nodejs-20_x",
             "yarn",
             "python39Full",
             "python39Packages.pip",
             "python39Packages.virtualenv"
-          ],
-          "overrides": {
-            "nodejs": {
-              "version": "20"
-            }
-          }
+          ]
         },
         "install": {
           "cmds": [
