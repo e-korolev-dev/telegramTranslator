@@ -1,11 +1,9 @@
-# bot/Dockerfile
-
 FROM node:18-alpine
 
 WORKDIR /app
 
-COPY . /app
+COPY . .
 
-RUN yarn install
+RUN npm install
 
-CMD ["node", "index.js"]
+CMD ["npm", "run", "start:dev"]

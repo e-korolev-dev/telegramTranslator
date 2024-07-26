@@ -1,5 +1,5 @@
 # Используйте подходящий базовый образ
-FROM python:3.9
+FROM python:3.10
 
 # Установите необходимые зависимости
 RUN pip install --upgrade pip

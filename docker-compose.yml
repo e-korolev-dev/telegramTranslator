@@ -18,5 +18,8 @@ services:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - API_URL=${API_URL}
       - NODE_ENV=${NODE_ENV}
+    volumes:
+      - ./bot:/app
     depends_on:
       - api
+    command: npm run start:dev
