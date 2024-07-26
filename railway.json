@@ -24,6 +24,6 @@
     }
   },
   "deploy": {
-    "startCommand": "sh -c 'cd api && . venv/bin/activate && python app.py & cd bot && node index.js'"
+    "startCommand": "sh -c 'cd api && . venv/bin/activate && python app.py & cd bot && npm run start:dev'"
   }
 }
