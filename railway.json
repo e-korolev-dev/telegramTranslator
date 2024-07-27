@@ -1,12 +1,14 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
+  "nodeVersion": "20.x",
   "build": {
     "builder": "NIXPACKS",
+    "node": "20.x",
     "nixpacksPlan": {
       "phases": {
         "setup": {
           "nixPkgs": [
-            "nodejs20",
+            "nodejs",
             "yarn",
             "python39Full",
             "python39Packages.pip",
