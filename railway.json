@@ -8,15 +8,15 @@
           "nixPkgs": [
             "nodejs",
             "yarn",
-            "python39Full",
-            "python39Packages.pip",
-            "python39Packages.virtualenv"
+            "python310Full",
+            "python310Packages.pip",
+            "python310Packages.virtualenv"
           ]
         },
         "install": {
           "cmds": [
             "cd bot && yarn install",
-            "cd api && python3.9 -m venv venv",
+            "cd api && python3.10 -m venv venv",
             "cd api && . venv/bin/activate && pip install --no-cache-dir --disable-pip-version-check --no-warn-script-location -r requirements.txt"
           ]
         }
