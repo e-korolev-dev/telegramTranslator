@@ -16,7 +16,7 @@
         "install": {
           "cmds": [
             "cd bot && yarn install",
-            "cd api && python3.10 -m venv venv",
+            "cd api && python3.9 -m venv venv",
             "cd api && . venv/bin/activate && pip install --no-cache-dir --disable-pip-version-check --no-warn-script-location -r requirements.txt"
           ]
         }
