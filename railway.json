@@ -24,6 +24,6 @@
     }
   },
   "deploy": {
-    "startCommand": "sh -c 'cd api && . venv/bin/activate && python app.py & cd bot && yarn run start:dev'"
+    "startCommand": "sh -c 'cd api && . venv/bin/activate && python app.py & cd bot && yarn run start:prod'"
   }
 }
