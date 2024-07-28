@@ -7,15 +7,15 @@
         "setup": {
           "nixPkgs": [
             "nodejs",
-            "npm",
-            "python39Full",
-            "python39Packages.pip",
-            "python39Packages.virtualenv"
+            "yarn",
+            "python310Full",
+            "python310Packages.pip",
+            "python310Packages.virtualenv"
           ]
         },
         "install": {
           "cmds": [
-            "cd bot && npm install",
+            "cd bot && yarn install",
             "cd api && python3.10 -m venv venv",
             "cd api && . venv/bin/activate && pip install --no-cache-dir --disable-pip-version-check --no-warn-script-location -r requirements.txt"
           ]
@@ -24,6 +24,6 @@
     }
   },
   "deploy": {
-    "startCommand": "sh -c 'cd api && . venv/bin/activate && python app.py & cd bot && node index.js'"
+    "startCommand": "sh -c 'cd api && . venv/bin/activate && python app.py & cd bot && yarn run start'"
   }
 }
