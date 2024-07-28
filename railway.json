@@ -19,16 +19,11 @@
             "cd api && python3.10 -m venv venv",
             "cd api && . venv/bin/activate && pip install --no-cache-dir --disable-pip-version-check --no-warn-script-location -r requirements.txt"
           ]
-        },
-        "build": {
-          "cmds": [
-            "cd bot && yarn build"
-          ]
         }
       }
     }
   },
   "deploy": {
-    "startCommand": "sh -c 'cd api && . venv/bin/activate && python app.py & cd bot && yarn run start:prod'"
+    "startCommand": "sh -c 'cd api && . venv/bin/activate && python app.py & cd bot && yarn run start'"
   }
 }

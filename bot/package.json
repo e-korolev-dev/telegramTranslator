@@ -7,8 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nest start",
-    "build": "nest build",
-    "start:prod": "node dist/main"
+    "build": "nest build"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
