@@ -8,4 +8,6 @@ RUN npm install
 
 COPY . .
 
+COPY package.dev.json package.json
+
 CMD ["npm", "run", "start:dev"]
